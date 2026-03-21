@@ -9,7 +9,7 @@ export default function App() {
   const clientId = useRef(Math.floor(Math.random() * 10000).toString());
 
   useEffect(() => {
-    ws.current = new WebSocket(ws://localhost:8000/ws/ + clientId.current);
+    ws.current = new WebSocket(`ws://localhost:8000/ws/${clientId.current}`);
     
     ws.current.onmessage = (event) => {
       const data = JSON.parse(event.data);
@@ -111,7 +111,7 @@ export default function App() {
             const isMe = msg.username === clientId.current;
 
             return (
-              <div key={index} className={lex " + " max-w-[85%] md:max-w-[70%]" + }>
+              <div key={index} className={`flex ${isMe ? 'flex-col items-end gap-1 ml-auto' : 'gap-4'} max-w-[85%] md:max-w-[70%]`}>
                 {!isMe && (
                   <div className="flex-shrink-0 mt-auto">
                     <div className="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center text-xs font-bold uppercase">
@@ -120,22 +120,22 @@ export default function App() {
                   </div>
                 )}
                 <div className={isMe ? '' : 'space-y-1'}>
-                  <div className={" + "p-4 rounded-xl shadow-sm leading-relaxed " + }>
+                  <div className={`p-4 rounded-xl shadow-sm leading-relaxed ${isMe ? 'bg-gradient-to-br from-primary to-primary-dim text-on-primary rounded-br-sm shadow-md shadow-primary/10 font-medium' : 'bg-surface-container-highest text-on-surface rounded-bl-sm'}`}>
                     {msg.type === "text" && <p>{msg.content}</p>}
                     {msg.type === "image" && (
                       <div className="flex flex-col gap-2">
-                        <img src={" + "http://localhost:8000" + } alt="upload" className="max-w-[200px] rounded-lg" />
+                        <img src={`http://localhost:8000${msg.file_url}`} alt="upload" className="max-w-[200px] rounded-lg" />
                         <span className="text-xs opacity-70">{msg.content}</span>
                       </div>
                     )}
                     {msg.type === "file" && (
-                      <a href={" + "http://localhost:8000" + } target="_blank" rel="noopener noreferrer" className="underline text-blue-200">
-                        ?? {msg.content}
+                      <a href={`http://localhost:8000${msg.file_url}`} target="_blank" rel="noopener noreferrer" className="underline text-blue-200">
+                        📄 {msg.content}
                       </a>
                     )}
                   </div>
-                  <span className={" + "block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/60 " + }>
-                     User {msg.username} � {new Date(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                  <span className={`block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/60 ${isMe ? 'mr-1' : 'ml-1'}`}>
+                     User {msg.username} • {new Date(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                   </span>
                 </div>
               </div>
