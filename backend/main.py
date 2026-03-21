@@ -12,6 +12,15 @@ from .database import engine, Base, get_db
 from .models import Message
 
 app = FastAPI(title="Chitchat Backend")
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
 
 # Ensure uploads directory exists
 UPLOAD_DIR = "backend/uploads"
@@ -117,3 +126,4 @@ async def upload_file(client_id: str = Form(...), file: UploadFile = File(...), 
 @app.get("/")
 async def get():
     return HTMLResponse('<h1>Chitchat Backend is running</h1><p>Static UI served at /static/stitch/chat_interface_main/code.html</p>')
+
