@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .glass-composer {
+            backdrop-filter: blur(12px);
+            background: rgba(26, 28, 30, 0.8);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "error-dim": "#9f0519",
+                "on-secondary-container": "#203ea2",
+                "on-primary-fixed-variant": "#002a61",
+                "on-surface": "#2d2f33",
+                "on-tertiary-fixed-variant": "#006826",
+                "surface-variant": "#dbdde3",
+                "on-secondary-fixed-variant": "#2c48ac",
+                "secondary-fixed-dim": "#b4c1ff",
+                "primary-fixed-dim": "#5191ff",
+                "on-error-container": "#570008",
+                "on-tertiary": "#cfffcd",
+                "error": "#b31b25",
+                "on-primary-container": "#00214f",
+                "tertiary": "#006a26",
+                "background": "#f6f6fb",
+                "on-background": "#2d2f33",
+                "outline": "#75777b",
+                "secondary": "#3853b7",
+                "on-error": "#ffefee",
+                "inverse-surface": "#0c0e12",
+                "surface-container-low": "#f0f0f6",
+                "surface-tint": "#0058bb",
+                "on-tertiary-container": "#005d21",
+                "inverse-on-surface": "#9c9da1",
+                "tertiary-dim": "#005d21",
+                "on-tertiary-fixed": "#004818",
+                "secondary-fixed": "#c6cfff",
+                "on-primary-fixed": "#000000",
+                "surface-container-highest": "#dbdde3",
+                "secondary-dim": "#2b47ab",
+                "surface": "#f6f6fb",
+                "primary-dim": "#004ca4",
+                "tertiary-container": "#6ffb85",
+                "inverse-primary": "#4b8eff",
+                "surface-container-lowest": "#ffffff",
+                "primary": "#0058bb",
+                "surface-container-high": "#e1e2e8",
+                "surface-container": "#e7e8ee",
+                "primary-container": "#6c9fff",
+                "on-secondary": "#f2f1ff",
+                "primary-fixed": "#6c9fff",
+                "secondary-container": "#c6cfff",
+                "on-surface-variant": "#5a5b60",
+                "on-secondary-fixed": "#00288d",
+                "tertiary-fixed": "#6ffb85",
+                "outline-variant": "#acadb1",
+                "surface-bright": "#f6f6fb",
+                "surface-dim": "#d2d4db",
+                "error-container": "#fb5151",
+                "on-primary": "#f0f2ff",
+                "tertiary-fixed-dim": "#60ec79"
+              },
+              fontFamily: {
+                "headline": ["Inter"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-[#0c0e12] font-Inter text-slate-100 antialiased overflow-hidden h-screen flex flex-col">
+<header class="bg-[#0c0e12] flex justify-between items-center w-full px-6 py-4 max-w-full border-none font-Inter antialiased text-sm">
+<div class="flex items-center gap-3">
+<span class="text-xl font-bold tracking-tight text-slate-100">The Fluid Dialogue</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#4b8eff] font-semibold border-b-2 border-[#4b8eff] pb-1" href="#">Messages</a>
+<a class="text-slate-400 hover:text-slate-100 transition-colors duration-200" href="#">Calls</a>
+<a class="text-slate-400 hover:text-slate-100 transition-colors duration-200" href="#">Contacts</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:bg-slate-800 p-2 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined">video_call</span>
+</button>
+<button class="text-slate-400 hover:bg-slate-800 p-2 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined">call</span>
+</button>
+<button class="text-slate-400 hover:bg-slate-800 p-2 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</header>
+<main class="flex-1 flex overflow-hidden">
+<aside class="bg-[#1a1c1e] hidden md:flex flex-col h-full border-r-0 p-4 gap-y-2 w-[30%] max-w-[400px] font-Inter text-base leading-relaxed">
+<div class="px-4 py-6 flex flex-col gap-1">
+<div class="flex justify-between items-end mb-4">
+<div>
+<h2 class="text-lg font-black text-white">Conversations</h2>
+<span class="text-xs text-[#4b8eff] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Active Now
+                        </span>
+</div>
+<button class="bg-[#4b8eff] text-white px-4 py-2 rounded-xl text-sm font-semibold hover:opacity-90 transition-all active:translate-x-1">
+                        New Chat
+                    </button>
+</div>
+<div class="relative mb-4">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-[20px]">search</span>
+<input class="w-full bg-[#2d2f33] border-none rounded-xl py-2 pl-10 pr-4 text-sm text-slate-200 focus:ring-1 focus:ring-[#4b8eff]/30 placeholder-slate-500" placeholder="Search chats..." type="text"/>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1 overflow-y-auto">
+<div class="bg-[#2d2f33] text-[#4b8eff] shadow-sm rounded-xl px-4 py-3 flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-medium">All Chats</span>
+</div>
+<div class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-slate-700 rounded-xl cursor-pointer transition-colors">
+<span class="material-symbols-outlined">mark_as_unread</span>
+<span>Unread</span>
+</div>
+<div class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-slate-700 rounded-xl cursor-pointer transition-colors">
+<span class="material-symbols-outlined">archive</span>
+<span>Archived</span>
+</div>
+<div class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-slate-700 rounded-xl cursor-pointer transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</div>
+<div class="mt-8 px-4">
+<h3 class="text-[10px] uppercase tracking-[0.1em] text-slate-500 font-bold mb-4">Recent Messages</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3 hover:bg-slate-800/50 p-2 rounded-xl cursor-pointer group transition-all">
+<div class="relative">
+<img alt="" class="w-10 h-10 rounded-full object-cover" data-alt="Close-up portrait of a woman with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeSDGn2m30A0dgQ9JqLHfb2C6gYf6mFErtj3o5QQ1aHA_Sk1LqnaqbP_vuOXbb2fP8RW0psJApEPFfYOdhR66x87zynNzIzMEzHtj2uSPq_-ytRbnmNd9jLHkUjsJWFTHS6wRHPYS1XRPPXNy3o054wU3BbqmGIeuzfJNn_ZxNDMagU2od3E811mJsyYF9Ak_QH3yTKQuLpOVpBSaDYDZsT9flaSb0YOOAELEB3FKSfrt3Vvrc9JOb4L-ntBtKXGvJyWyIngHtACjr"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-tertiary border-2 border-[#1a1c1e] rounded-full"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h4 class="text-sm font-semibold text-white truncate">Elena Vance</h4>
+<span class="text-[10px] text-slate-500">12:45 PM</span>
+</div>
+<p class="text-xs text-slate-400 truncate">Did you review the new proposal?</p>
+</div>
+</div>
+<div class="flex items-center gap-3 hover:bg-slate-800/50 p-2 rounded-xl cursor-pointer group transition-all">
+<div class="relative">
+<img alt="" class="w-10 h-10 rounded-full object-cover" data-alt="Professional headshot of a smiling man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASx7A51vJLZYo4RK1Tus_82S9dT8Gedc-Akwqa73-NtOZpFGhXE4fDxc0mdHmWEU_1w_yWUzDngv5UeBRwHg16u814H3DeopNUusybhL4-aFJfHIM5l1D_O5jIhUHddStjDE1Y8a554l49cKpt7zQIPMzeJx1groIKJiJFdjkcJor-Gw9ITb30RVu6gQMYR5krw2CG2439HMJ7_P_y4b6GAxkaJV7Yo2ObtvfMjl38HohZnCPUt3YfxvZCu4FDW-FMx9qsjye-FITT"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-slate-600 border-2 border-[#1a1c1e] rounded-full"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h4 class="text-sm font-semibold text-white truncate">Marcus Thorne</h4>
+<span class="text-[10px] text-slate-500">10:20 AM</span>
+</div>
+<p class="text-xs text-[#4b8eff] font-medium truncate">Sent a voice message</p>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<footer class="mt-auto border-t border-slate-800/50 pt-4 flex flex-col gap-1">
+<div class="text-slate-400 px-4 py-2 flex items-center gap-3 hover:bg-slate-700 rounded-xl cursor-pointer text-sm">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span>Help</span>
+</div>
+<div class="text-slate-400 px-4 py-2 flex items-center gap-3 hover:bg-slate-700 rounded-xl cursor-pointer text-sm">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span>Logout</span>
+</div>
+</footer>
+</aside>
+<section class="flex-1 flex flex-col bg-[#0c0e12] relative">
+<div class="px-8 py-4 flex items-center justify-between border-b border-white/5 bg-[#0c0e12]/80 backdrop-blur-md z-10 sticky top-0">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="" class="w-10 h-10 rounded-full border-2 border-[#4b8eff]/20" data-alt="User avatar with colorful gradient background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLzem5AA9Mmt-FxMSUwz_daMxjZXiv0AJVzvwdZiVLl1GotRu_Dg1JJ23gs88Lz_ov-LjWRc760gnt2QBj8-NbMA28lj0k5OyKxpkJyq9XuF-vIU-cJkD8QBOe78OXzVE61nOCvxViXZdECbWuax8WEGfn9nSFB1-EgIdvxWja83xQwf-_8rgBHCDRkH8cHPFVgqn89UqPh-aV04Py90YyscGw1x0bXcxfmrQ1icNjpmjRqeSka8TsKnqWm1rnyh8wY8zkCiEevai-"/>
+<span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-tertiary border-[2.5px] border-[#0c0e12] rounded-full"></span>
+</div>
+<div>
+<h2 class="headline-sm text-white font-bold tracking-tight">Elena Vance</h2>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Online Now</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-800/50 text-slate-400 hover:text-white hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-800/50 text-slate-400 hover:text-white hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined">star</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-8 py-10 flex flex-col gap-6">
+<div class="flex justify-center mb-4">
+<span class="text-[10px] font-bold text-slate-600 uppercase tracking-[0.2em] bg-slate-800/30 px-3 py-1 rounded-full">Today</span>
+</div>
+<div class="flex gap-3 max-w-[70%]">
+<img alt="" class="w-8 h-8 rounded-full self-end mb-1" data-alt="Minimalist geometric user icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_2vbb-WGu6-NZDgqNrfBNrEsnuElh1D2mLRjsVXoVPkyj38L-DMnqA7l78P_M0ycgWheSKkY-tNp9Cfx2TmeVxLS7jKQE7ebGjsy7ae7VSUmb-raKEGbGP3-kUt_KJjsXih5xLe_OoP7AljosImoRk4qVLeMWTOV0YHhfpi8AH1QjwIavR2DTJaRqr9hdkLwYKeLDRAVfmGiGpy9n6zMyn6rBEmVhRploL-KDpuWSFRnq5MiGH4VKAjKXtaADClemLyqygh2QHCRy"/>
+<div class="flex flex-col gap-1">
+<div class="bg-[#2d2f33] text-slate-200 px-4 py-3 rounded-t-xl rounded-br-xl rounded-bl-sm text-sm leading-relaxed shadow-sm">
+                            Hey! I just finished reviewing the architecture for the "Fluid" project. It looks incredible.
+                        </div>
+<span class="text-[9px] font-bold text-slate-600 uppercase tracking-wider ml-1">12:45 PM</span>
+</div>
+</div>
+<div class="flex gap-3 max-w-[70%]">
+<img alt="" class="w-8 h-8 rounded-full self-end mb-1 opacity-0" data-alt="Spacer avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn4fmE9Q7N_rl3EJ9C3-LuGKqVoIDt9t_o78NpYh0ff9m7EF9QzL5n9WC_H72vL9GF1E-xLT6kGQnSNZOv3j1GvXTAVwvbFrCtROUfDpTYO5bH8SFTciOnGS8eH0kzFb64hoUGvNPiS_jtNcWmio2NUZJVsJklWnOSNENFpp7s1lA93qTSmKjSSNUZgwhxHPQLfrdDH2JRTR-KVGoR0FD-FpyfIz0HhKbhnML7LjssrdmeWwC607eY0OcgbjqMJjaMmNsW4LxI2ETs"/>
+<div class="flex flex-col gap-1">
+<div class="bg-[#2d2f33] text-slate-200 px-4 py-3 rounded-xl text-sm leading-relaxed shadow-sm">
+                            The way we're handling the tonal layering instead of hard borders is a game changer for dark mode.
+                        </div>
+</div>
+</div>
+<div class="flex gap-3 max-w-[70%] self-end flex-row-reverse">
+<div class="flex flex-col gap-1 items-end">
+<div class="bg-gradient-to-br from-[#0058bb] to-[#4b8eff] text-white px-4 py-3 rounded-t-xl rounded-bl-xl rounded-br-sm text-sm leading-relaxed shadow-lg shadow-[#0058bb]/10">
+                            Totally agree! I was just thinking about the "Weightless Canvas" approach. It feels so much more premium.
+                        </div>
+<span class="text-[9px] font-bold text-slate-600 uppercase tracking-wider mr-1">12:47 PM • Read</span>
+</div>
+</div>
+<div class="flex gap-3 max-w-[70%]">
+<img alt="" class="w-8 h-8 rounded-full self-end mb-1" data-alt="Minimalist geometric user icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF9wFC4bySWpWPjW3KfSqMmI8SGFljQZt5ADrZWRqAP-S198hxiU-8hXbrjfDsxMPDD4vuPxoOg_T1RH934g24VEhgqfXftqx3IBBxNv8cjf1EZKUWKmqskjkzbvYLDYxl-GDkQqhsTuD8Hlq8_F_QbniM8imVG3uv_7RTaioiIu-vqR0TG5S4qniRhBTEORYFfiKTgLfDYoTztTFHa6axlJ7z-e4_V8hGsB5DvmnjbWhfE1LHgDp3Q4xntoPJZUTlDgyFGi586Ztu"/>
+<div class="flex flex-col gap-1">
+<div class="bg-[#2d2f33] text-slate-200 px-4 py-3 rounded-t-xl rounded-br-xl rounded-bl-sm text-sm leading-relaxed shadow-sm">
+                            Exactly. Should we hop on a quick video call to finalize the glassmorphism parameters for the composer?
+                        </div>
+</div>
+</div>
+<div class="flex gap-3 max-w-[70%] self-end flex-row-reverse">
+<div class="flex flex-col gap-1 items-end">
+<div class="bg-gradient-to-br from-[#0058bb] to-[#4b8eff] text-white px-4 py-3 rounded-t-xl rounded-bl-xl rounded-br-sm text-sm leading-relaxed">
+                            Give me 5 minutes. I'm just polishing the responsive pivot logic.
+                        </div>
+</div>
+</div>
+<div class="sticky bottom-4 mx-auto">
+<button class="bg-slate-800/80 backdrop-blur-md text-slate-300 text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-full border border-white/5 flex items-center gap-2 hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+                        Jump to Latest
+                    </button>
+</div>
+</div>
+<div class="p-6 bg-gradient-to-t from-[#0c0e12] via-[#0c0e12]/90 to-transparent">
+<div class="max-w-4xl mx-auto relative glass-composer p-2 rounded-3xl border border-white/5 shadow-2xl">
+<div class="flex items-end gap-2 px-2 py-1">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-slate-500 hover:text-[#4b8eff] transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<div class="flex-1 min-h-[44px] flex items-center">
+<textarea class="w-full bg-transparent border-none focus:ring-0 text-slate-200 placeholder-slate-500 resize-none py-2 text-sm max-h-32" placeholder="Type a message..." rows="1"></textarea>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-slate-500 hover:text-slate-300 transition-colors">
+<span class="material-symbols-outlined">sentiment_satisfied</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-[#4b8eff] text-white shadow-lg shadow-[#4b8eff]/20 hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+</div>
+<p class="text-center text-[9px] text-slate-600 mt-3 uppercase tracking-widest font-bold">End-to-end encrypted</p>
+</div>
+</section>
+</main>
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[#1a1c1e] px-6 py-3 flex justify-between items-center z-50 border-t border-white/5">
+<div class="flex flex-col items-center gap-1 text-[#4b8eff]">
+<span class="material-symbols-outlined">chat</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Chats</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">call</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Calls</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">people</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Contacts</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Settings</span>
+</div>
+</nav>
+</body></html>

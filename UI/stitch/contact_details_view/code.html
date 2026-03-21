@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact Details - The Fluid Dialogue</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "error-dim": "#9f0519",
+                "on-secondary-container": "#203ea2",
+                "on-primary-fixed-variant": "#002a61",
+                "on-surface": "#2d2f33",
+                "on-tertiary-fixed-variant": "#006826",
+                "surface-variant": "#dbdde3",
+                "on-secondary-fixed-variant": "#2c48ac",
+                "secondary-fixed-dim": "#b4c1ff",
+                "primary-fixed-dim": "#5191ff",
+                "on-error-container": "#570008",
+                "on-tertiary": "#cfffcd",
+                "error": "#b31b25",
+                "on-primary-container": "#00214f",
+                "tertiary": "#006a26",
+                "background": "#f6f6fb",
+                "on-background": "#2d2f33",
+                "outline": "#75777b",
+                "secondary": "#3853b7",
+                "on-error": "#ffefee",
+                "inverse-surface": "#0c0e12",
+                "surface-container-low": "#f0f0f6",
+                "surface-tint": "#0058bb",
+                "on-tertiary-container": "#005d21",
+                "inverse-on-surface": "#9c9da1",
+                "tertiary-dim": "#005d21",
+                "on-tertiary-fixed": "#004818",
+                "secondary-fixed": "#c6cfff",
+                "on-primary-fixed": "#000000",
+                "surface-container-highest": "#dbdde3",
+                "secondary-dim": "#2b47ab",
+                "surface": "#f6f6fb",
+                "primary-dim": "#004ca4",
+                "tertiary-container": "#6ffb85",
+                "inverse-primary": "#4b8eff",
+                "surface-container-lowest": "#ffffff",
+                "primary": "#0058bb",
+                "surface-container-high": "#e1e2e8",
+                "surface-container": "#e7e8ee",
+                "primary-container": "#6c9fff",
+                "on-secondary": "#f2f1ff",
+                "primary-fixed": "#6c9fff",
+                "secondary-container": "#c6cfff",
+                "on-surface-variant": "#5a5b60",
+                "on-secondary-fixed": "#00288d",
+                "tertiary-fixed": "#6ffb85",
+                "outline-variant": "#acadb1",
+                "surface-bright": "#f6f6fb",
+                "surface-dim": "#d2d4db",
+                "error-container": "#fb5151",
+                "on-primary": "#f0f2ff",
+                "tertiary-fixed-dim": "#60ec79"
+              },
+              fontFamily: {
+                "headline": ["Inter"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #dbdde3;
+            border-radius: 10px;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- SideNavBar (Shared Component Blueprint) -->
+<aside class="hidden md:flex flex-col h-full bg-[#f0f0f6] dark:bg-[#1a1c1e] w-[30%] max-w-[400px] p-4 gap-y-2 font-Inter text-base leading-relaxed">
+<div class="flex items-center gap-3 px-4 py-6 mb-4">
+<div class="relative">
+<img alt="User Profile" class="w-12 h-12 rounded-full object-cover" data-alt="User profile photo showing a smiling face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATuBQDDGvzhssx8hfiz42UaHFUHxNt5CuUrPznSsso5mNaWnGuqGGn8z_et2Upblq_M1b4goRJsBo_90T6kNKpNfqE7YOtYt3nEA6mHiKHSGU0xZdrPGRaa-BcivC0mS7Bryf-usgENuxqrHaLpp21KWNzd9GsiMLmZ8qCy-s5kc5Sg9qG4VH9V8H8Nfo9sRFlEU3qufMFeYK0q7CDRFhUpq1zNiJ8TtPN5AXcQvXa2_6u-zup47oMmKKwGCo0F-ejMtLnkq2O2B14"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-tertiary rounded-full border-2 border-[#f0f0f6]"></span>
+</div>
+<div>
+<h2 class="text-lg font-black text-[#2d2f33] dark:text-white leading-tight">Conversations</h2>
+<p class="text-xs text-on-surface-variant">Active Now</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center bg-white dark:bg-[#2d2f33] text-[#007AFF] dark:text-[#4b8eff] shadow-sm rounded-xl px-4 py-3 translate-x-1 transition-transform cursor-pointer">
+<span class="material-symbols-outlined mr-3">chat</span>
+<span>All Chats</span>
+</div>
+<div class="flex items-center text-[#5a5b60] dark:text-slate-400 px-4 py-3 hover:bg-[#dbdde3] dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined mr-3">mark_as_unread</span>
+<span>Unread</span>
+</div>
+<div class="flex items-center text-[#5a5b60] dark:text-slate-400 px-4 py-3 hover:bg-[#dbdde3] dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined mr-3">archive</span>
+<span>Archived</span>
+</div>
+<div class="flex items-center text-[#5a5b60] dark:text-slate-400 px-4 py-3 hover:bg-[#dbdde3] dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span>Settings</span>
+</div>
+</nav>
+<div class="mt-auto border-t border-outline-variant/10 pt-4 space-y-1">
+<div class="flex items-center text-[#5a5b60] dark:text-slate-400 px-4 py-3 hover:bg-[#dbdde3] dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined mr-3">help</span>
+<span>Help</span>
+</div>
+<div class="flex items-center text-[#5a5b60] dark:text-slate-400 px-4 py-3 hover:bg-[#dbdde3] dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined mr-3">logout</span>
+<span>Logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Chat Area (Context Background) -->
+<main class="flex-1 flex flex-col relative bg-surface overflow-hidden">
+<!-- TopNavBar (Shared Component Blueprint) -->
+<header class="flex justify-between items-center w-full px-6 py-4 bg-[#f6f6fb] dark:bg-[#0c0e12] font-Inter antialiased text-sm">
+<div class="flex items-center gap-3">
+<h1 class="text-xl font-bold tracking-tight text-[#2d2f33] dark:text-slate-100 cursor-pointer">The Fluid Dialogue</h1>
+<span class="text-outline-variant">/</span>
+<div class="flex items-center gap-2 cursor-pointer group">
+<img alt="Julianne Moore" class="w-8 h-8 rounded-full" data-alt="Portrait of Julianne Moore" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcDzEmntm8hMW6qZMj2liuMJmKcYSMVI8q3KZcHv5QbwsGm94AeWsEi9RjzSOjggzy3olqPZVj8tu62QVMOiHKbhiRM6PcT6QNwUIZeTyFHQp_hpS777QqUnxqzaPo7sFhLbqC4XB68gEthlm8YrvJg5yxO4asKqHwe6WoP1WLHgOvN4Y2jxzR2xWZ7v2GHZTYsPporI81FDZhxhBD53BPy3wKt2ThoBdurAsIs3I6CIFypEZn-W6W14Pc0dtQBsVMPUyQk9OwGzHc"/>
+<span class="font-semibold text-primary">Julianne Moore</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-4">
+<span class="text-[#007AFF] dark:text-[#4b8eff] font-semibold border-b-2 border-[#007AFF] pb-1 cursor-pointer">Messages</span>
+<span class="text-[#5a5b60] dark:text-slate-400 hover:text-[#2d2f33] transition-colors cursor-pointer">Calls</span>
+<span class="text-[#5a5b60] dark:text-slate-400 hover:text-[#2d2f33] transition-colors cursor-pointer">Contacts</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 rounded-full hover:bg-[#f0f0f6] dark:hover:bg-slate-800 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[#5a5b60]">video_call</span>
+</button>
+<button class="p-2 rounded-full hover:bg-[#f0f0f6] dark:hover:bg-slate-800 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[#5a5b60]">call</span>
+</button>
+<button class="p-2 rounded-full hover:bg-[#f0f0f6] dark:hover:bg-slate-800 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[#5a5b60]">more_vert</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex-1 p-8 opacity-20 pointer-events-none">
+<!-- Mock Background Content -->
+<div class="max-w-3xl mx-auto space-y-6">
+<div class="flex justify-start">
+<div class="bg-surface-container-highest p-4 rounded-xl rounded-bl-sm max-w-sm">
+                            Hey! Did you check the latest design concepts I sent over?
+                        </div>
+</div>
+<div class="flex justify-end">
+<div class="bg-gradient-to-br from-primary to-primary-container text-white p-4 rounded-xl rounded-br-sm max-w-sm">
+                            Just looking at them now. The tonal layering looks fantastic.
+                        </div>
+</div>
+</div>
+</div>
+<!-- CONTACT DETAILS OVERLAY/SIDEBAR (The Requested Task) -->
+<div class="absolute inset-y-0 right-0 w-full md:w-[420px] bg-surface-container-lowest shadow-[8px_0_32px_rgba(45,47,51,0.04)] z-50 flex flex-col transform transition-transform duration-300">
+<!-- Overlay Header -->
+<div class="flex items-center justify-between px-6 py-5">
+<h3 class="text-lg font-bold text-on-surface">Contact Info</h3>
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<!-- Hero Profile Section -->
+<div class="flex flex-col items-center px-6 py-8 text-center">
+<div class="relative mb-4">
+<div class="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-primary to-tertiary-container shadow-xl">
+<img alt="Julianne Moore" class="w-full h-full rounded-full object-cover border-4 border-white" data-alt="Large profile picture of Julianne Moore" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOrmHrqRzq1Wx09ljqCONYzQcVR5iZ_Cap7OT23LyIp4fwoJvnyD6jbHyjRsMlG7T4BR7VrDX7ifUz5VqgyGzxdkXQOapbX0mZqfEyqbKm6OuIW4RP4xmY7r8Gn-laAn0OXtIXJCfkhAOqZuHqt-EHhA_BBz1Sv3IA8d-7JjJ6_2mmLeQ_w9R8x7Rqy8GTuqLCejmHkIZ2bM7cqRat0I2iDQQpD7sqcFq2Kmdxs--Pm-BdJDy2BUsFJeaKE7WTW65XGJ1rVOgeBG95"/>
+</div>
+<span class="absolute bottom-2 right-2 w-6 h-6 bg-tertiary rounded-full border-4 border-white shadow-sm"></span>
+</div>
+<h2 class="text-2xl font-bold text-on-surface tracking-tight">Julianne Moore</h2>
+<p class="text-on-surface-variant italic mt-1 font-medium">"Designing the future of dialogue 🎨"</p>
+<div class="flex gap-3 mt-6">
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary">chat</span>
+</div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Message</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary">videocam</span>
+</div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Video</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary">search</span>
+</div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Search</span>
+</button>
+</div>
+</div>
+<!-- Details Bento Grid -->
+<div class="px-6 space-y-6 pb-12">
+<!-- Contact Info Section -->
+<div class="bg-surface-container-low rounded-3xl p-5 space-y-4">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-outline mt-0.5">call</span>
+<div>
+<p class="text-sm font-semibold text-on-surface">+1 (555) 234-8910</p>
+<p class="text-xs text-on-surface-variant">Mobile</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-outline mt-0.5">mail</span>
+<div>
+<p class="text-sm font-semibold text-on-surface">j.moore@dialogue.com</p>
+<p class="text-xs text-on-surface-variant">Email</p>
+</div>
+</div>
+</div>
+<!-- Shared Media Section -->
+<div class="space-y-4">
+<div class="flex items-center justify-between px-1">
+<h4 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Shared Media</h4>
+<button class="text-xs font-bold text-primary hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="aspect-square rounded-xl overflow-hidden bg-surface-container-high group cursor-pointer relative">
+<img alt="Shared Media" class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="Abstract blue and pink flowing digital art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpuUGMGQgpCvYJc4NoSRZ6IxcQCqootwAqHweNaykovui95Qk4HTHwo1Gchw3RRXHClvR6j1GCkI44tprHyp88M-xwe-6XNiOp4hqI8yoKEL8Bfgbfq4HZivJBCD_qd9jEhkj8MVv3B-BQ9vdexYsXZ_fUKoZDnqZxSq-XuduZIB7xMAGiVm1eDfq_8ymtN8JD6_Ooyt73KhWzOaGUmmLkNfYHDMVeRFaSaIsKnnAtWHIN3FKmMD-XdEIYRiONdhcZZ-DMbzlzXVg1"/>
+</div>
+<div class="aspect-square rounded-xl overflow-hidden bg-surface-container-high group cursor-pointer relative">
+<img alt="Shared Media" class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="Dark aesthetic interior with neon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA14kVTdREzk8UOXPY2BMxBe_wDBS3Ujp0Q_M4mj71XyD76YIBqmkU98sWz8yQg2stAHTfUqvR6RDejj7i1HB8oanhx9gHqau8LIvHEwnIG_7iDDdV9sqE1ooTbMchyFesinzWeSNedt98nH_odl141mZVRPOF8oErdHyhDVPpfkgVD16K4-DyrZtoQH4WSSjtd3ituXzx-Xt4QPgKQ7_kWkgVsbRvHJPXuSWrF6M4NovIrK0Km8sPN165nBa8GVBv8vW3_FLp_RsGI"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/20">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="aspect-square rounded-xl overflow-hidden bg-surface-container-high group cursor-pointer relative">
+<img alt="Shared Media" class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="Abstract colorful gradient blur" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0AMTnF5s5IH7XTD_h0kCRP0sfTfknScrX6RraM8Fzmds0bbfTQJFo3RFUYNZvmSHVNyc5pEWTzacGtlrx0WxHwVlOhtPhHgBl8ix_HMLOPOlZkroeRnLiVjwgSr8FsE5HX6hZaiN2hnFSFB-1y4352GKzLYayR5SQ9etibBd06vE92HxIv2BjaMLlum-9aGYzR5-hM_uo1UwkpLCdeRXzThSTpvAoJ5LBNKLyPCIGJefHcmvLyq-9tlkY3fEn5RsptLRhjIeJBW9Y"/>
+</div>
+</div>
+</div>
+<!-- Groups In Common -->
+<div class="space-y-4">
+<h4 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant px-1">Groups In Common</h4>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-3 bg-white rounded-2xl hover:bg-surface-container transition-colors cursor-pointer shadow-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-secondary font-bold text-xs">DS</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Design Systems Weekly</p>
+<p class="text-xs text-on-surface-variant">124 members</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white rounded-2xl hover:bg-surface-container transition-colors cursor-pointer shadow-sm">
+<div class="w-10 h-10 rounded-full bg-tertiary-container flex items-center justify-center text-tertiary font-bold text-xs">FT</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Fluid Team 2024</p>
+<p class="text-xs text-on-surface-variant">8 members</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="pt-4 border-t border-outline-variant/10">
+<div class="space-y-1">
+<button class="w-full flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-error hover:bg-error-container/10 rounded-2xl transition-all group">
+<span class="material-symbols-outlined">block</span>
+<span class="text-sm font-semibold">Block Julianne Moore</span>
+</button>
+<button class="w-full flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-error hover:bg-error-container/10 rounded-2xl transition-all group">
+<span class="material-symbols-outlined">report_problem</span>
+<span class="text-sm font-semibold">Report Contact</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
