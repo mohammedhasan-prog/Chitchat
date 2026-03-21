@@ -3,5 +3,106 @@
 @tailwind utilities;
 
 body { font-family: 'Inter', sans-serif; }
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─── Premium background mesh ────────────────────────────────────────────── */
+.mesh-background {
+  background-color: #f6f6fb;
+  background-image:
+    radial-gradient(at 0%   0%,   hsla(225,100%,94%,1) 0, transparent 50%),
+    radial-gradient(at 50%  0%,   hsla(225,100%,96%,1) 0, transparent 50%),
+    radial-gradient(at 100% 0%,   hsla(225,100%,94%,1) 0, transparent 50%),
+    radial-gradient(at 0%   100%, hsla(225,100%,94%,1) 0, transparent 50%),
+    radial-gradient(at 50%  100%, hsla(225,100%,96%,1) 0, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(225,100%,94%,1) 0, transparent 50%);
+}
+
+.premium-bg {
+  background-color: #f6f6fb;
+  background-image:
+    radial-gradient(at 0%   0%,   hsla(220,100%,95%,1) 0, transparent 50%),
+    radial-gradient(at 100% 0%,   hsla(240,100%,98%,1) 0, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(220,100%,95%,1) 0, transparent 50%),
+    radial-gradient(at 0%   100%, hsla(240,100%,98%,1) 0, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* ─── Glassmorphism ───────────────────────────────────────────────────────── */
+.glass-panel {
+  background: rgba(255,255,255,0.70);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.30);
+}
+.glass-card {
+  background: rgba(255,255,255,0.70);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.40);
+}
+.glass-cta {
+  background: linear-gradient(135deg, #0058bb 0%, #6c9fff 100%);
+}
+.weightless-shadow {
+  box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+}
+
+/* ─── Animated background orbs (login screen) ────────────────────────────── */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: float 7s ease-in-out infinite alternate;
+  filter: blur(80px);
+}
+.orb-1 {
+  width: 42vw; height: 42vw;
+  top: -8%; left: -8%;
+  background: rgba(0, 88, 187, 0.12);
+  animation-delay: 0s;
+}
+.orb-2 {
+  width: 36vw; height: 36vw;
+  bottom: -8%; right: -8%;
+  background: rgba(56, 83, 183, 0.10);
+  animation-delay: -2.5s;
+}
+.orb-3 {
+  width: 28vw; height: 28vw;
+  top: 20%; right: 8%;
+  background: rgba(111, 251, 133, 0.06);
+  animation-delay: -4.5s;
+}
+
+@keyframes float {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(0, 18px) scale(1.04); }
+}
+
+/* ─── Emoji picker layout ─────────────────────────────────────────────────── */
+.emoji-picker {
+  display: grid;
+  grid-template-columns: repeat(10, 36px);
+  gap: 2px;
+}
+
+@media (max-width: 480px) {
+  .emoji-picker { grid-template-columns: repeat(6, 36px); }
+}
+
+/* ─── Animate-in utility ──────────────────────────────────────────────────── */
+.animate-in { animation: animIn 0.25s ease both; }
+.fade-in    { --tw-enter-opacity: 0; }
+.slide-in-from-left-2  { --tw-enter-translate-x: -8px; }
+.slide-in-from-right-2 { --tw-enter-translate-x:  8px; }
+.duration-300 { animation-duration: 0.3s; }
+
+@keyframes animIn {
+  from { opacity: var(--tw-enter-opacity, 1); transform: translateX(var(--tw-enter-translate-x, 0)); }
+  to   { opacity: 1; transform: translateX(0); }
+}
