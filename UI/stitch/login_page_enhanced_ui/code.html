@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ether Chat - Welcome Back</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#f6f6fb",
+              "tertiary": "#006a26",
+              "surface": "#f6f6fb",
+              "secondary-fixed-dim": "#b4c1ff",
+              "on-primary": "#f0f2ff",
+              "inverse-on-surface": "#9c9da1",
+              "secondary-container": "#c6cfff",
+              "surface-container": "#e7e8ee",
+              "secondary": "#3853b7",
+              "on-surface": "#2d2f33",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#005d21",
+              "on-primary-fixed-variant": "#002a61",
+              "surface-container-high": "#e1e2e8",
+              "on-tertiary": "#cfffcd",
+              "surface-variant": "#dbdde3",
+              "primary-fixed-dim": "#5191ff",
+              "on-primary-container": "#00214f",
+              "inverse-primary": "#4b8eff",
+              "secondary-fixed": "#c6cfff",
+              "primary-fixed": "#6c9fff",
+              "inverse-surface": "#0c0e12",
+              "surface-tint": "#0058bb",
+              "on-secondary-fixed": "#00288d",
+              "on-tertiary-fixed": "#004818",
+              "on-secondary": "#f2f1ff",
+              "primary": "#0058bb",
+              "error": "#b31b25",
+              "on-secondary-fixed-variant": "#2c48ac",
+              "error-dim": "#9f0519",
+              "tertiary-fixed": "#6ffb85",
+              "tertiary-container": "#6ffb85",
+              "outline": "#75777b",
+              "on-error-container": "#570008",
+              "on-error": "#ffefee",
+              "on-secondary-container": "#203ea2",
+              "surface-bright": "#f6f6fb",
+              "surface-container-highest": "#dbdde3",
+              "on-tertiary-fixed-variant": "#006826",
+              "primary-container": "#6c9fff",
+              "on-background": "#2d2f33",
+              "tertiary-dim": "#005d21",
+              "on-surface-variant": "#5a5b60",
+              "surface-dim": "#d2d4db",
+              "surface-container-low": "#f0f0f6",
+              "on-primary-fixed": "#000000",
+              "primary-dim": "#004ca4",
+              "outline-variant": "#acadb1",
+              "secondary-dim": "#2b47ab",
+              "error-container": "#fb5151",
+              "tertiary-fixed-dim": "#60ec79"
+            },
+            fontFamily: {
+              "headline": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .weightless-shadow {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        }
+        .glass-cta {
+            background: linear-gradient(135deg, #0058bb 0%, #6c9fff 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .mesh-background {
+            background-color: #f6f6fb;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(225, 100%, 94%, 1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225, 100%, 96%, 1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(225, 100%, 94%, 1) 0, transparent 50%), 
+                radial-gradient(at 0% 100%, hsla(225, 100%, 94%, 1) 0, transparent 50%), 
+                radial-gradient(at 50% 100%, hsla(225, 100%, 96%, 1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, hsla(225, 100%, 94%, 1) 0, transparent 50%);
+        }
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translate(0, 0px); }
+            50% { transform: translate(0, 15px); }
+            100% { transform: translate(0, -0px); }
+        }
+    </style>
+</head>
+<body class="mesh-background font-body text-on-surface flex items-center justify-center min-h-screen p-6 overflow-hidden relative">
+<!-- Animated Background Orbs for Depth -->
+<div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] -z-10 floating" style="animation-delay: 0s;"></div>
+<div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[120px] -z-10 floating" style="animation-delay: -2s;"></div>
+<div class="fixed top-[20%] right-[10%] w-[30%] h-[30%] bg-tertiary-container/5 rounded-full blur-[100px] -z-10 floating" style="animation-delay: -4s;"></div>
+<!-- Login Container -->
+<main class="w-full max-w-md relative z-10">
+<!-- Brand identity centered above card -->
+<div class="text-center mb-8">
+<div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl glass-cta text-on-primary mb-4 weightless-shadow">
+<span class="material-symbols-outlined text-3xl" data-icon="bubble_chart">bubble_chart</span>
+</div>
+<h1 class="font-headline text-3xl font-extrabold tracking-tight text-on-surface">Ether Chat</h1>
+</div>
+<!-- The Glassmorphic Login Card -->
+<div class="glass-card rounded-3xl p-10 weightless-shadow">
+<header class="mb-8 text-center">
+<h2 class="font-headline text-2xl font-bold text-on-surface mb-2">Welcome Back</h2>
+<p class="font-body text-on-surface-variant text-sm">Continue your conversations</p>
+</header>
+<form class="space-y-6">
+<!-- Email Input -->
+<div class="space-y-2">
+<label class="block font-label text-[11px] font-bold uppercase tracking-wider text-on-surface-variant" for="email">Email</label>
+<div class="relative">
+<input class="w-full px-4 py-3.5 bg-white/50 border border-white/20 rounded-xl text-on-surface placeholder:text-outline/60 focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="email" placeholder="name@example.com" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="block font-label text-[11px] font-bold uppercase tracking-wider text-on-surface-variant" for="password">Password</label>
+<a class="text-[11px] font-bold text-primary hover:text-primary-dim transition-colors uppercase tracking-wider" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<input class="w-full px-4 py-3.5 bg-white/50 border border-white/20 rounded-xl text-on-surface placeholder:text-outline/60 focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="password" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Primary CTA -->
+<button class="w-full glass-cta text-on-primary font-semibold py-4 rounded-xl shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all duration-200 mt-2" type="submit">
+                Log In
+            </button>
+</form>
+<!-- Divider -->
+<div class="relative my-8">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-black/5"></div>
+</div>
+<div class="relative flex justify-center text-xs">
+<span class="px-3 bg-transparent text-on-surface-variant/60 font-label uppercase tracking-widest text-[10px]">Or continue with</span>
+</div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 px-4 py-3.5 border border-white/40 rounded-xl bg-white/40 hover:bg-white/60 transition-colors active:scale-[0.98]">
+<img alt="" class="w-5 h-5" data-alt="Google logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEdqdzi90zKb39YbvU0VuflA9OWbh83hSvUV50izjH32WBmiSYGEJsrJZc37rhfcf3IVvy7M2RHzu8zovmkmCf7p29pI0kx23Krxfmqiq5BWhHglilI0R-SjEpFZS8REIq6T84_2PmVxz4dovskZOoagNAQfp-ENIrICbuT9FvTOQ24gyr6bVpvEhMl8Ilebppgnujay-ffWOTVrRiQD-AoFC5ObiCu_4U52r0-GgcZPf6pWwWH6nLXnvMNUxzfdowZVozbVnW38rA"/>
+<span class="text-sm font-medium text-on-surface">Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 px-4 py-3.5 border border-white/40 rounded-xl bg-white/40 hover:bg-white/60 transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-xl" data-icon="apple" style="font-variation-settings: 'FILL' 1;">ios</span>
+<span class="text-sm font-medium text-on-surface">Apple</span>
+</button>
+</div>
+</div>
+<!-- Footer link -->
+<footer class="mt-8 text-center">
+<p class="font-body text-on-surface-variant text-sm">
+            Don't have an account? 
+            <a class="text-primary font-semibold hover:underline decoration-2 underline-offset-4" href="#">Sign up</a>
+</p>
+</footer>
+</main>
+</body></html>

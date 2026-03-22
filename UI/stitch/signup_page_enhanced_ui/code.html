@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign Up | The Fluid Dialogue</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#f8fafc",
+              "tertiary": "#006a26",
+              "surface": "#f8fafc",
+              "secondary-fixed-dim": "#b4c1ff",
+              "on-primary": "#ffffff",
+              "inverse-on-surface": "#9c9da1",
+              "secondary-container": "#c6cfff",
+              "surface-container": "#f1f5f9",
+              "secondary": "#3853b7",
+              "on-surface": "#0f172a",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#005d21",
+              "on-primary-fixed-variant": "#002a61",
+              "surface-container-high": "#e2e8f0",
+              "on-tertiary": "#cfffcd",
+              "surface-variant": "#e2e8f0",
+              "primary-fixed-dim": "#5191ff",
+              "on-primary-container": "#00214f",
+              "inverse-primary": "#4b8eff",
+              "secondary-fixed": "#c6cfff",
+              "primary-fixed": "#6c9fff",
+              "inverse-surface": "#0c0e12",
+              "surface-tint": "#0058bb",
+              "on-secondary-fixed": "#00288d",
+              "on-tertiary-fixed": "#004818",
+              "on-secondary": "#f2f1ff",
+              "primary": "#2563eb",
+              "error": "#b31b25",
+              "on-secondary-fixed-variant": "#2c48ac",
+              "error-dim": "#9f0519",
+              "tertiary-fixed": "#6ffb85",
+              "tertiary-container": "#6ffb85",
+              "outline": "#94a3b8",
+              "on-error-container": "#570008",
+              "on-error": "#ffefee",
+              "on-secondary-container": "#203ea2",
+              "surface-bright": "#f8fafc",
+              "surface-container-highest": "#cbd5e1",
+              "on-tertiary-fixed-variant": "#006826",
+              "primary-container": "#6c9fff",
+              "on-background": "#0f172a",
+              "tertiary-dim": "#005d21",
+              "on-surface-variant": "#64748b",
+              "surface-dim": "#d1d5db",
+              "surface-container-low": "#f8fafc",
+              "on-primary-fixed": "#000000",
+              "primary-dim": "#004ca4",
+              "outline-variant": "#e2e8f0",
+              "secondary-dim": "#2b47ab",
+              "error-container": "#fb5151",
+              "tertiary-fixed-dim": "#60ec79"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .premium-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        }
+        .grid-pattern {
+            background-image: radial-gradient(circle at 1px 1px, #e2e8f0 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        .glow-sphere {
+            filter: blur(80px);
+            opacity: 0.4;
+            mix-blend-mode: multiply;
+        }
+        .glass-cta {
+            background: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        .glass-cta:hover {
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-body text-on-surface antialiased min-h-screen flex items-center justify-center p-6 selection:bg-primary/20 overflow-x-hidden relative">
+<!-- Premium Background Elements -->
+<div class="fixed inset-0 grid-pattern pointer-events-none -z-20"></div>
+<div class="fixed top-[-10%] right-[-10%] w-[60vw] h-[60vw] glow-sphere bg-blue-200 rounded-full animate-pulse pointer-events-none -z-10"></div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] glow-sphere bg-indigo-100 rounded-full pointer-events-none -z-10" style="animation-delay: 1s"></div>
+<div class="fixed top-[20%] left-[10%] w-[30vw] h-[30vw] glow-sphere bg-sky-100 rounded-full pointer-events-none -z-10" style="animation-delay: 2s"></div>
+<div class="w-full max-w-[500px] relative z-10">
+<!-- Branding Header -->
+<div class="mb-10 text-center">
+<h1 class="font-headline font-black text-4xl tracking-tight text-slate-900 mb-2">Ether Chat</h1>
+<div class="h-1.5 w-8 bg-primary mx-auto rounded-full"></div>
+</div>
+<!-- Main Content Canvas (Refined Glassmorphism) -->
+<div class="premium-glass rounded-2xl p-8 md:p-10 transition-all duration-500">
+<header class="mb-8">
+<h2 class="font-headline text-2xl font-bold tracking-tight text-slate-900">Create an Account</h2>
+<p class="font-body text-slate-500 mt-1">Join the next generation of dialogue</p>
+</header>
+<form class="space-y-5">
+<!-- Inputs Group -->
+<div class="space-y-4">
+<div class="group">
+<label class="block font-label text-[0.7rem] font-bold uppercase tracking-widest text-slate-500 mb-2 ml-1" for="name">Full Name</label>
+<input class="w-full h-12 px-5 bg-white/50 border border-slate-200 focus:border-primary/50 focus:ring-4 focus:ring-primary/5 rounded-xl transition-all duration-200 placeholder:text-slate-400 text-slate-900" id="name" placeholder="John Doe" type="text"/>
+</div>
+<div class="group">
+<label class="block font-label text-[0.7rem] font-bold uppercase tracking-widest text-slate-500 mb-2 ml-1" for="email">Email Address</label>
+<input class="w-full h-12 px-5 bg-white/50 border border-slate-200 focus:border-primary/50 focus:ring-4 focus:ring-primary/5 rounded-xl transition-all duration-200 placeholder:text-slate-400 text-slate-900" id="email" placeholder="name@domain.com" type="email"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="group">
+<label class="block font-label text-[0.7rem] font-bold uppercase tracking-widest text-slate-500 mb-2 ml-1" for="password">Password</label>
+<input class="w-full h-12 px-5 bg-white/50 border border-slate-200 focus:border-primary/50 focus:ring-4 focus:ring-primary/5 rounded-xl transition-all duration-200 placeholder:text-slate-400 text-slate-900" id="password" placeholder="••••••••" type="password"/>
+</div>
+<div class="group">
+<label class="block font-label text-[0.7rem] font-bold uppercase tracking-widest text-slate-500 mb-2 ml-1" for="confirm">Confirm</label>
+<input class="w-full h-12 px-5 bg-white/50 border border-slate-200 focus:border-primary/50 focus:ring-4 focus:ring-primary/5 rounded-xl transition-all duration-200 placeholder:text-slate-400 text-slate-900" id="confirm" placeholder="••••••••" type="password"/>
+</div>
+</div>
+</div>
+<!-- Terms -->
+<div class="flex items-center gap-3 py-1">
+<div class="relative flex items-center">
+<input class="w-5 h-5 rounded-md border-slate-200 bg-white/50 text-primary focus:ring-offset-0 focus:ring-primary/20 transition-all cursor-pointer" id="terms" type="checkbox"/>
+</div>
+<label class="text-sm text-slate-500 cursor-pointer select-none" for="terms">
+                        I agree to the <span class="text-primary font-semibold hover:underline">Terms of Service</span>
+</label>
+</div>
+<!-- Primary CTA -->
+<button class="glass-cta w-full h-14 rounded-xl text-white font-bold text-base hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 mt-2" type="submit">
+<span>Create Account</span>
+<span class="material-symbols-outlined text-xl" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Secondary Path -->
+<footer class="mt-8 pt-8 border-t border-slate-200/50 text-center">
+<p class="text-slate-500 text-sm">
+                    Already have an account? 
+                    <a class="text-primary font-bold ml-1 hover:underline" href="#">Log in</a>
+</p>
+</footer>
+</div>
+<!-- Trust Badges -->
+<div class="mt-10 flex justify-center items-center gap-8 opacity-30 grayscale hover:grayscale-0 hover:opacity-60 transition-all duration-500">
+<span class="material-symbols-outlined text-slate-600 text-2xl" data-icon="security" title="Secure Connection">security</span>
+<span class="material-symbols-outlined text-slate-600 text-2xl" data-icon="encrypted" title="End-to-End Encryption">encrypted</span>
+<span class="material-symbols-outlined text-slate-600 text-2xl" data-icon="verified_user" title="Privacy Protected">verified_user</span>
+</div>
+</div>
+</body></html>

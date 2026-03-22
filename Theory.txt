@@ -1,8 +1,0 @@
-Added the Dashboard UI based on the provided dashboard HTML design. Included total message sent, active chat counts, and an Avatar upload feature that pushes to the /upload/?is_profile_pic=true endpoint. Fixed a bug where uploading a profile picture in the dashboard did not immediately reflect the image change in the rest of the application. This was resolved by passing an onUpdateUser={setUser} prop to the Dashboard component and triggering it after the frontend received the newly generated picture url from the backend.
-Explained why a Python virtual environment (venv) is needed:
-1. Dependency Isolation: Keeps project-specific dependencies separate, preventing version conflicts between different projects.
-2. Preventing System Breakages: Avoids modifying the system-wide Python installation, which OS tools might rely on.
-3. Reproducibility: Makes it easy to generate an exact `requirements.txt` to replicate the setup on other machines or for deployment.
-4. No Admin Privileges Needed: Allows installing Python packages locally without needing administrator or root privileges.
-
-Added Emoji Picker React (v4) to the ChatApp frontend. Installed `emoji-picker-react` via npm and integrated it into the chat message input. The picker toggles when clicking the `mood` icon, and selected emojis are appended to the user's input message.
