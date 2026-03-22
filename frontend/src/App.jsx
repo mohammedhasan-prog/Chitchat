@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import EmojiPickerLib from 'emoji-picker-react';
+import Dashboard from './Dashboard';
 
 const COLORS=['#0058bb','#3853b7','#006a26','#8b5cf6','#ec4899','#f59e0b','#ef4444','#06b6d4','#10b981','#f97316'];
 function colorFor(n=''){let h=0;for(let i=0;i<n.length;i++)h=n.charCodeAt(i)+((h<<5)-h);return COLORS[Math.abs(h)%COLORS.length]}
@@ -201,7 +202,7 @@ function CreateGroupModal({users,friends,me,onClose,onCreate}){
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
-function Sidebar({users,user,friends,groups,activeConv,onSelectConv,unread,isOpen,onClose,onCreateGroup,onLogout,onAddFriend,onlineNames}){
+function Sidebar({users,user,friends,groups,activeConv,onSelectConv,unread,isOpen,onClose,onCreateGroup,onLogout,onAddFriend,onlineNames,onOpenDashboard}){
   const me = user?.display_name;
   return(
     <>
@@ -291,7 +292,10 @@ function Sidebar({users,user,friends,groups,activeConv,onSelectConv,unread,isOpe
           <div className="mt-auto pt-4 border-t border-outline-variant/10">
             <div className="flex items-center gap-3 px-2 py-3 bg-surface-container/30 rounded-2xl border border-outline-variant/5">
               <Avatar name={me} size={34} pic={user?.profile_pic_url}/>
-              <div className="flex-1 min-w-0"><span className="text-xs font-bold text-on-surface block truncate">{me}</span><p className="text-[10px] text-on-surface-variant">Member</p></div>
+              <div className="flex-1 min-w-0">
+                <span className="text-xs font-bold text-on-surface block truncate">{me}</span>
+                <button onClick={onOpenDashboard} className="text-[10px] text-primary hover:underline font-bold uppercase tracking-wider">Dashboard</button>
+              </div>
               <button onClick={onLogout} className="p-1.5 text-on-surface-variant hover:text-red-500 transition-colors rounded-lg hover:bg-red-50" title="Log out">
                 <span className="material-symbols-outlined text-lg">logout</span>
               </button>
@@ -351,6 +355,7 @@ export default function App() {
   const [sidebarOpen,setSidebarOpen]=useState(false);const [unread,setUnread]=useState({});
   const [dmLoaded,setDmLoaded]=useState({});const [groupLoaded,setGroupLoaded]=useState({});
   const [showCreateGroup,setShowCreateGroup]=useState(false);
+  const [view,setView]=useState('chat');
 
   const username=user?.display_name;
   const ws=useRef(null),endRef=useRef(null),typingRef=useRef(false),typingTimer=useRef(null);
@@ -447,7 +452,9 @@ export default function App() {
     setFriends(p => p.find(f => f.display_name === u.display_name) ? p : [...p, u]);
   };
 
-  const handleLogout=()=>{localStorage.removeItem('chitchat_user');ws.current?.close();setUser(null);setMessages({});setUsers([]);setGroups([]);setFriends([]);setTypers([]);setActiveConv('global');setUnread({});setDmLoaded({});setGroupLoaded({})};
+  const handleLogout=()=>{localStorage.removeItem('chitchat_user');ws.current?.close();setUser(null);setMessages({});setUsers([]);setGroups([]);setFriends([]);setTypers([]);setActiveConv('global');setUnread({});setDmLoaded({});setGroupLoaded({});setView('chat')};
+
+  const totalUnread=Object.values(unread).reduce((s,v)=>s+(v||0),0);
 
   const currentTypers=typers.filter(t=>t.conv===activeConv&&t.name!==username).map(t=>t.name);
   const currentMessages=messages[activeConv]||[];
@@ -469,7 +476,21 @@ export default function App() {
       {showCreateGroup&&<CreateGroupModal users={users} friends={friends} me={username} onClose={()=>setShowCreateGroup(false)} onCreate={createGroup}/>}
       <Sidebar users={users} user={user} friends={friends} groups={groups} activeConv={activeConv} onSelectConv={handleSelectConv} unread={unread}
         isOpen={sidebarOpen} onClose={()=>setSidebarOpen(false)} onCreateGroup={()=>setShowCreateGroup(true)} onLogout={handleLogout}
-        onAddFriend={handleAddFriend} onlineNames={onlineNames}/>
+        onAddFriend={handleAddFriend} onlineNames={onlineNames} onOpenDashboard={()=>{setView('dashboard');setSidebarOpen(false)}}/>
+
+      {view==='dashboard' ? (
+        <Dashboard
+          user={user}
+          messages={messages}
+          friends={friends}
+          groups={groups}
+          totalUnread={totalUnread}
+          onClose={()=>setView('chat')}
+          onStartChat={()=>setView('chat')}
+          onCreateGroup={()=>{setView('chat');setShowCreateGroup(true)}}
+          onUpdateUser={setUser}
+        />
+      ) : (
 
       <main className="flex-1 flex flex-col relative overflow-hidden">
         <header className="flex justify-between items-center w-full px-6 py-4 glass-panel border-b border-outline-variant/10 sticky top-0 z-10">
@@ -509,6 +530,7 @@ export default function App() {
           </div>
         </div>
       </main>
+      )}
     </div>
   );
 }
