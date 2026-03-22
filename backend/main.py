@@ -213,7 +213,7 @@ async def websocket_endpoint(
 
     # Fetch this user's profile pic from DB after accepting the connection
     user_result = await db.execute(select(User).where(User.display_name == username))
-    db_user = user_result.scalar_one_or_none()
+    db_user = user_result.scalars().first()
     if db_user:
         manager.by_name[username]["profile_pic_url"] = db_user.profile_pic_url
 
