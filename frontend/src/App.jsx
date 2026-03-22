@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+﻿import { useState, useEffect, useRef, useCallback } from 'react';
 import EmojiPickerLib from 'emoji-picker-react';
 import Dashboard from './Dashboard';
 
@@ -312,16 +312,29 @@ function Sidebar({ users, user, friends, groups, activeConv, onSelectConv, unrea
 }
 
 // ─── TypingIndicator ──────────────────────────────────────────────────────────
-function TypingIndicator({ typers, profilePics={} }) {
+function TypingIndicator({ typers, profilePics = {} }) {
   if (!typers.length) return null;
-  return (<div className="flex gap-4 max-w-[75%]"><div className="flex-shrink-0 mt-auto"><Avatar name={typers[0]} size={36} pic={profilePics[typers[0]]}/></div><div className="space-y-1"><div className="bg-white/60 backdrop-blur-sm border border-white/40 px-5 py-4 rounded-2xl rounded-bl-sm shadow-sm flex items-center gap-1.5">{[0, 150, 300].map(d => <div key={d} className="w-1.5 h-1.5 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: `${d}ms` }} />)}</div><span className="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50 ml-2">{typers[0]} is typing…</span></div></div>);
+  return (<div className="flex gap-4 max-w-[75%]"><div className="flex-shrink-0 mt-auto"><Avatar name={typers[0]} size={36} pic={profilePics[typers[0]]} /></div><div className="space-y-1"><div className="bg-white/60 backdrop-blur-sm border border-white/40 px-5 py-4 rounded-2xl rounded-bl-sm shadow-sm flex items-center gap-1.5">{[0, 150, 300].map(d => <div key={d} className="w-1.5 h-1.5 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: `${d}ms` }} />)}</div><span className="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50 ml-2">{typers[0]} is typing…</span></div></div>);
 }
 
 // ─── Bubble ───────────────────────────────────────────────────────────────────
-function Bubble({ msg, isMe, pic }) {
+function Bubble({ msg, isMe, pic, onDelete }) {
   if (msg.type === 'system') return (<div className="flex justify-center my-2"><span className="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant/50 bg-white/40 backdrop-blur-sm border border-white/40 px-5 py-1.5 rounded-full shadow-sm">{msg.content}</span></div>);
   const body = <>{msg.type === 'text' && <p>{msg.content}</p>}{msg.type === 'image' && <div className="flex flex-col gap-2"><img src={`${API}${msg.file_url}`} alt="img" className="max-w-[200px] rounded-xl" /><span className="text-xs opacity-70">{msg.content}</span></div>}{msg.type === 'file' && <a href={`${API}${msg.file_url}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 underline">📄 {msg.content}</a>}</>;
-  if (isMe) return (<div className="flex flex-col items-end gap-1.5 ml-auto max-w-[85%] md:max-w-[72%]"><div className="bg-gradient-to-br from-primary to-primary-dim text-on-primary p-5 rounded-2xl rounded-br-sm shadow-xl shadow-primary/20 leading-relaxed font-medium">{body}</div><div className="flex items-center gap-1.5 mr-2"><span className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50">{fmt(msg.timestamp)}</span><span className="material-symbols-outlined text-[12px] text-primary">done_all</span></div></div>);
+  if (isMe) return (
+    <div className="flex flex-col items-end gap-1.5 ml-auto max-w-[85%] md:max-w-[72%] group relative">
+      <div className="bg-gradient-to-br from-primary to-primary-dim text-on-primary p-5 rounded-2xl rounded-br-sm shadow-xl shadow-primary/20 leading-relaxed font-medium relative flex items-center">
+        <button onClick={() => onDelete(msg.id)} className="absolute -left-10 p-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 rounded-full flex items-center justify-center">
+          <span className="material-symbols-outlined text-sm">delete</span>
+        </button>
+        {body}
+      </div>
+      <div className="flex items-center gap-1.5 mr-2">
+        <span className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50">{fmt(msg.timestamp)}</span>
+        <span className="material-symbols-outlined text-[12px] text-primary">done_all</span>
+      </div>
+    </div>
+  );
   return (<div className="flex gap-4 max-w-[85%] md:max-w-[72%]"><div className="flex-shrink-0 mt-auto"><Avatar name={msg.username || '?'} size={36} pic={pic} /></div><div className="space-y-1.5"><div className="bg-white text-on-surface p-5 rounded-2xl rounded-bl-sm shadow-xl shadow-on-surface/5 border border-white/50 leading-relaxed">{body}</div><span className="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50 ml-2">{msg.username || 'Unknown'} · {fmt(msg.timestamp)}</span></div></div>);
 }
 
@@ -382,6 +395,12 @@ export default function App() {
     if (conv !== activeConvRef.current) setUnread(p => ({ ...p, [conv]: (p[conv] || 0) + 1 }));
   }, []);
 
+  const deleteMessage = useCallback(id => {
+    if (ws.current?.readyState === WebSocket.OPEN) {
+      ws.current.send(JSON.stringify({ type: 'delete_message', message_id: id }));
+    }
+  }, []);
+
   useEffect(() => {
     if (!username) return;
     const url = `ws://localhost:8000/ws/${clientId.current}?username=${encodeURIComponent(username)}`;
@@ -398,6 +417,13 @@ export default function App() {
         const conv = d.group_id ? `group_${d.group_id}` : d.to ? `dm_${d.username}` : 'global';
         if (d.typing) setTypers(p => [...p.filter(t => t.name !== d.username), { name: d.username, conv }]);
         else setTypers(p => p.filter(t => t.name !== d.username));
+        return;
+      }
+      if (d.type === 'message_deleted') {
+        setMessages(p => ({
+          ...p,
+          [d.conversation]: (p[d.conversation] || []).filter(m => m.id !== d.message_id)
+        }));
         return;
       }
       if (d.type === 'dm_history') {
@@ -518,7 +544,7 @@ export default function App() {
 
           <div className="flex-1 overflow-y-auto p-6 md:p-10 space-y-5 hide-scrollbar">
             <div className="flex justify-center my-4"><span className="text-[10px] font-black uppercase tracking-[0.25em] text-on-surface-variant/50 bg-white/40 backdrop-blur-sm border border-white/40 px-5 py-1.5 rounded-full shadow-sm">{isDM ? `💬 DM with ${dmTarget}` : isGroup ? `👥 ${activeGroup?.name || 'Group'}` : 'Welcome to Chitchat ✨'}</span></div>
-            {currentMessages.map((m, i) => <Bubble key={i} msg={m} isMe={m.username === username} pic={profilePics[m.username]} />)}
+            {currentMessages.map((m, i) => <Bubble key={i} msg={m} isMe={m.username === username} pic={profilePics[m.username]} onDelete={deleteMessage} />)}
             <TypingIndicator typers={currentTypers} profilePics={profilePics} />
             <div ref={endRef} />
           </div>

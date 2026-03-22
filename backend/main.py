@@ -301,6 +301,33 @@ async def websocket_endpoint(
                 group_info = {"id": new_group.id, "name": group_name, "created_by": username, "members": members}
                 for member in members:
                     await manager.send_to_name(member, {"type": "group_created", "group": group_info})
+            elif mtype == "delete_message":
+                msg_id = data.get("message_id")
+                if msg_id:
+                    m_result = await db.execute(select(Message).where(Message.id == msg_id))
+                    msg_obj = m_result.scalar_one_or_none()
+                    if msg_obj and (msg_obj.username_display == username or msg_obj.username == username):
+                        conversation = "global"
+                        if msg_obj.group_id: conversation = f"group_{msg_obj.group_id}"
+                        elif msg_obj.recipient_username: conversation = f"dm_{msg_obj.recipient_username}"
+
+                        await db.delete(msg_obj)
+                        await db.commit()
+
+                        payload = {"type": "message_deleted", "message_id": msg_id, "conversation": conversation}
+
+                        if msg_obj.group_id:
+                            g_result = await db.execute(select(Group).where(Group.id == msg_obj.group_id))
+                            group = g_result.scalar_one_or_none()
+                            if group:
+                                await manager.send_to_names(json.loads(group.members), payload)
+                        elif msg_obj.recipient_username:
+                            await manager.send_to_name(username, payload)
+                            payload_to_receiver = dict(payload)
+                            payload_to_receiver["conversation"] = f"dm_{username}"
+                            await manager.send_to_name(msg_obj.recipient_username, payload_to_receiver)
+                        else:
+                            await manager.broadcast(payload)
 
             elif mtype == "text":
                 content = data.get("content", "").strip()

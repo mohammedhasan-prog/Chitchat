@@ -1,0 +1,20 @@
+In Git, "Publish Branch" refers to pushing a local branch to a remote repository (like GitHub) for the first time. This creates a counterpart of your local branch on the remote server, allowing others to see it, pull from it, and enabling you to create Pull Requests. It is equivalent to running `git push -u origin <branch-name>`.
+
+To push your code to the `main` branch, you have two primary options:
+
+**Method 1: The Pull Request Way (Recommended for Teams)**
+1. **Publish/Push your current branch** to GitHub.
+2. Go to your repository on GitHub.com.
+3. Click **"Compare & pull request"**.
+4. Create the Pull Request and then click **"Merge pull request"** to combine it into `main`.
+
+**Method 2: The Direct Merge Way (For Solo Projects)**
+Using the terminal, you can merge your current branch (e.g. `feature/dashboard`) directly into main:
+1. `git add .`
+2. `git commit -m "your message"`
+3. `git checkout main` (Switch back to the main branch)
+4. `git merge feature/dashboard` (Bring your new code into main)
+5. `git push origin main` (Upload the updated main branch to GitHub)
+
+**Message Deletion:**
+When a user clicks the delete button (trash icon) on one of their messages, the message is permanently deleted from the SQLite database (`await db.delete(msg_obj); await db.commit()`), and a WebSocket event is broadcast to instantly remove the message from the chat UI of all participants.
