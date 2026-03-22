@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
+import EmojiPicker from 'emoji-picker-react';
 
 export default function App() {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const ws = useRef(null);
   const messagesEndRef = useRef(null);
   
@@ -147,9 +149,22 @@ export default function App() {
         <div className="p-6 md:p-8 bg-gradient-to-t from-surface to-surface/0">
           <div className="max-w-4xl mx-auto">
             <div className="bg-surface-container-lowest rounded-full p-2 pl-6 shadow-xl shadow-on-surface/5 flex items-center gap-2 border border-outline-variant/10 focus-within:border-primary/30 transition-all">
-              <button className="text-outline hover:text-primary transition-colors">
-                <span className="material-symbols-outlined">mood</span>
-              </button>
+              <div className="relative">
+                <button 
+                  className="text-outline hover:text-primary transition-colors flex items-center justify-center p-1"
+                  onClick={() => setShowEmojiPicker(prev => !prev)}
+                >
+                  <span className="material-symbols-outlined">mood</span>
+                </button>
+                {showEmojiPicker && (
+                  <div className="absolute bottom-full left-0 mb-4 z-50 shadow-2xl rounded-xl">
+                    <EmojiPicker 
+                      onEmojiClick={(emojiObject) => setInputMessage(prev => prev + emojiObject.emoji)}
+                      theme="auto"
+                    />
+                  </div>
+                )}
+              </div>
               <input
                 className="flex-1 bg-transparent border-none focus:ring-0 text-on-surface text-sm py-3 font-medium placeholder:text-outline/60 outline-none"
                 placeholder="Type a message..."
