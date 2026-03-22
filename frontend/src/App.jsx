@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import EmojiPickerLib from 'emoji-picker-react';
 
 const COLORS=['#0058bb','#3853b7','#006a26','#8b5cf6','#ec4899','#f59e0b','#ef4444','#06b6d4','#10b981','#f97316'];
 function colorFor(n=''){let h=0;for(let i=0;i<n.length;i++)h=n.charCodeAt(i)+((h<<5)-h);return COLORS[Math.abs(h)%COLORS.length]}
 function ini(n=''){return n.trim().split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase()||'??'}
 function fmt(ts){if(!ts)return'';try{return new Date(ts).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}catch{return''}}
-const EMOJIS=['😀','😂','😍','😎','🥳','🤔','😢','😡','👍','👎','❤️','🔥','✨','💯','🙏','👏','🎉','😴','🤣','💀','😱','🥺','😤','🤯','🫶','💪','👀','🫠','🧠','🎯'];
+
 const API='http://localhost:8000';
 
 function Avatar({name,size=40,icon,pic}){
@@ -318,8 +319,25 @@ function Bubble({msg,isMe}){
 
 // ─── EmojiPicker ──────────────────────────────────────────────────────────────
 function EmojiPicker({onSelect,onClose}){
-  const ref=useRef();useEffect(()=>{const fn=e=>{if(!ref.current?.contains(e.target))onClose()};document.addEventListener('mousedown',fn);return()=>document.removeEventListener('mousedown',fn)},[onClose]);
-  return(<div ref={ref} className="emoji-picker glass-card rounded-2xl p-3 shadow-2xl border border-white/50">{EMOJIS.map(e=><button key={e} onClick={()=>onSelect(e)} className="w-9 h-9 text-xl rounded-lg hover:bg-surface-container transition-all hover:scale-110 flex items-center justify-center">{e}</button>)}</div>);
+  const ref=useRef();
+  useEffect(()=>{
+    const fn=e=>{if(!ref.current?.contains(e.target))onClose()};
+    document.addEventListener('mousedown',fn);
+    return()=>document.removeEventListener('mousedown',fn);
+  },[onClose]);
+  return(
+    <div ref={ref} className="shadow-2xl rounded-2xl overflow-hidden">
+      <EmojiPickerLib
+        onEmojiClick={(emojiData)=>onSelect(emojiData.emoji)}
+        theme="light"
+        height={400}
+        width={320}
+        searchDisabled={false}
+        previewConfig={{showPreview:false}}
+        lazyLoadEmojis={true}
+      />
+    </div>
+  );
 }
 
 // ─── Main App ─────────────────────────────────────────────────────────────────
@@ -375,13 +393,24 @@ export default function App() {
       }
       if(d.type==='dm_history'){
         const conv=`dm_${d.with_username}`;
-        setMessages(p=>({...p,[conv]:d.messages||[]}));
+        setMessages(p=>{
+          const existing=p[conv]||[];
+          const histIds=new Set((d.messages||[]).map(m=>m.id).filter(Boolean));
+          // Keep any real-time messages not yet in history, then append
+          const realOnly=existing.filter(m=>m.id==null||!histIds.has(m.id));
+          return {...p,[conv]:[...(d.messages||[]),...realOnly]};
+        });
         setDmLoaded(p=>({...p,[d.with_username]:true}));
         return;
       }
       if(d.type==='group_history'){
         const conv=`group_${d.group_id}`;
-        setMessages(p=>({...p,[conv]:d.messages||[]}));
+        setMessages(p=>{
+          const existing=p[conv]||[];
+          const histIds=new Set((d.messages||[]).map(m=>m.id).filter(Boolean));
+          const realOnly=existing.filter(m=>m.id==null||!histIds.has(m.id));
+          return {...p,[conv]:[...(d.messages||[]),...realOnly]};
+        });
         setGroupLoaded(p=>({...p,[d.group_id]:true}));
         return;
       }
