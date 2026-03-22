@@ -209,12 +209,14 @@ async def websocket_endpoint(
     username: str = "Anonymous",
     db: AsyncSession = Depends(get_db),
 ):
-    # Fetch this user's profile pic from DB
+    await manager.connect(client_id, username, websocket)
+
+    # Fetch this user's profile pic from DB after accepting the connection
     user_result = await db.execute(select(User).where(User.display_name == username))
     db_user = user_result.scalar_one_or_none()
-    user_pic = db_user.profile_pic_url if db_user else None
+    if db_user:
+        manager.by_name[username]["profile_pic_url"] = db_user.profile_pic_url
 
-    await manager.connect(client_id, username, websocket, profile_pic_url=user_pic)
 
     # Global history
     result = await db.execute(
