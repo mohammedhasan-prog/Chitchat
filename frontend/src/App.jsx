@@ -69,6 +69,7 @@ function SearchBar({ me, friends, onAddFriend, onSelectDM }) {
   const [searching, setSearching] = useState(false);
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState('');
+  const [adding, setAdding] = useState(false);
   const ref = useRef();
   const timer = useRef();
 
@@ -97,6 +98,8 @@ function SearchBar({ me, friends, onAddFriend, onSelectDM }) {
   };
 
   const handleAdd = async (u) => {
+    if (adding) return;
+    setAdding(true);
     try {
       const res = await fetch(`${API}/friends/add`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -106,6 +109,7 @@ function SearchBar({ me, friends, onAddFriend, onSelectDM }) {
       if (res.ok) { setMsg(`✅ Added ${u.display_name}!`); onAddFriend(u); }
       else setMsg(data.detail || 'Error');
     } catch { setMsg('Network error'); }
+    finally { setAdding(false); }
   };
 
   const friendNames = friends.map(f => f.display_name);
@@ -151,9 +155,9 @@ function SearchBar({ me, friends, onAddFriend, onSelectDM }) {
                     <span className="material-symbols-outlined text-sm">chat</span>Message
                   </button>
                 ) : (
-                  <button onClick={() => handleAdd(u)}
-                    className="text-xs font-bold text-white bg-primary px-3 py-1.5 rounded-lg hover:bg-primary-dim transition-all flex items-center gap-1 shadow-sm">
-                    <span className="material-symbols-outlined text-sm">person_add</span>Add
+                  <button onClick={() => handleAdd(u)} disabled={adding}
+                    className="text-xs font-bold text-white bg-primary px-3 py-1.5 rounded-lg transition-all flex items-center gap-1 shadow-sm disabled:opacity-50 hover:bg-primary-dim">
+                    <span className="material-symbols-outlined text-sm">person_add</span>{adding ? 'Adding...' : 'Add'}
                   </button>
                 )}
               </div>
