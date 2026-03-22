@@ -147,9 +147,9 @@ class ConnectionManager:
         self.by_name: Dict[str, dict] = {}
         self.by_id: Dict[str, str] = {}
 
-    async def connect(self, client_id: str, username: str, websocket: WebSocket):
+    async def connect(self, client_id: str, username: str, websocket: WebSocket, profile_pic_url: Optional[str] = None):
         await websocket.accept()
-        self.by_name[username] = {"ws": websocket, "client_id": client_id}
+        self.by_name[username] = {"ws": websocket, "client_id": client_id, "profile_pic_url": profile_pic_url}
         self.by_id[client_id] = username
 
     def disconnect(self, client_id: str):
@@ -178,7 +178,7 @@ class ConnectionManager:
             if cid: self.by_id.pop(cid, None)
 
     def online_users(self):
-        return [{"id": c["client_id"], "username": u} for u, c in self.by_name.items()]
+        return [{"id": c["client_id"], "username": u, "profile_pic_url": c.get("profile_pic_url")} for u, c in self.by_name.items()]
 
     def is_online(self, username: str) -> bool:
         return username in self.by_name
@@ -210,6 +210,13 @@ async def websocket_endpoint(
     db: AsyncSession = Depends(get_db),
 ):
     await manager.connect(client_id, username, websocket)
+
+    # Fetch this user's profile pic from DB after accepting the connection
+    user_result = await db.execute(select(User).where(User.display_name == username))
+    db_user = user_result.scalars().first()
+    if db_user:
+        manager.by_name[username]["profile_pic_url"] = db_user.profile_pic_url
+
 
     # Global history
     result = await db.execute(
